@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using MahApps.Metro;
 using System.Collections.ObjectModel;
+using System.IO;
 
 namespace MultiTool
 {
@@ -40,6 +41,8 @@ namespace MultiTool
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            ChangeAppStyle(Properties.Settings.Default.color, Properties.Settings.Default.BG);
+
             List<string> colorList = GetColorList();
             List<string> bgList = GetBGList();
 
@@ -68,9 +71,10 @@ namespace MultiTool
 
             string bgColor = mnu.Header.ToString();
 
-            Tuple<AppTheme, Accent> appStyle = ThemeManager.DetectAppStyle(Application.Current);
+            ChangeAppStyle(Properties.Settings.Default.color, bgColor);
 
-            ChangeAppStyle(appStyle.Item2.Name, bgColor);
+            Properties.Settings.Default.BG = bgColor;
+            Properties.Settings.Default.Save();
         }
 
         private void NewMenuItem2_Click(object sender, RoutedEventArgs e)
@@ -79,9 +83,10 @@ namespace MultiTool
 
             string color = mnu.Header.ToString();
 
-            Tuple<AppTheme, Accent> appStyle = ThemeManager.DetectAppStyle(Application.Current);
+            ChangeAppStyle(color, Properties.Settings.Default.BG);
 
-            ChangeAppStyle(color, appStyle.Item1.Name);
+            Properties.Settings.Default.color = color;
+            Properties.Settings.Default.Save();
         }
 
         private List<string> GetColorList()
