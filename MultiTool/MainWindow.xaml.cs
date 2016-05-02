@@ -28,10 +28,6 @@ namespace MultiTool
             InitializeComponent();
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
         public void ChangeAppStyle(string color, string background)
         {
             Tuple<AppTheme, Accent> appStyle = ThemeManager.DetectAppStyle(Application.Current);
@@ -39,6 +35,7 @@ namespace MultiTool
             ThemeManager.ChangeAppStyle(Application.Current,
                                      ThemeManager.GetAccent(color),
                                      ThemeManager.GetAppTheme(background));
+
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
@@ -126,6 +123,11 @@ namespace MultiTool
             bgList.Add("BaseDark");
 
             return bgList;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/Farinius/MultiTool");
         }
     }
 }
